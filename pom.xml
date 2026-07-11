@@ -130,6 +130,11 @@
             <artifactId>druid-spring-boot-4-starter</artifactId>
             <version>${druid.version}</version>
         </dependency>
+        <!-- 内存向量库 本地测试用，生产替换Milvus -->
+        <!-- Removed unavailable langchain4j in-memory embedding store dependency.
+             Replaced by a lightweight local in-project implementation to avoid
+             relying on an external artifact that is not published to Maven Central.
+        -->
     </dependencies>
     <dependencyManagement>
         <dependencies>
