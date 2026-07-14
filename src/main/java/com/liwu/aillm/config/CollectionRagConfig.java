@@ -3,8 +3,8 @@ package com.liwu.aillm.config;
 import dev.langchain4j.data.document.splitter.DocumentSplitters;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.model.embedding.EmbeddingModel;
+import dev.langchain4j.model.embedding.onnx.allminilml6v2.AllMiniLmL6V2EmbeddingModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
-import dev.langchain4j.model.openai.OpenAiEmbeddingModel;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import dev.langchain4j.store.embedding.EmbeddingStoreIngestor;
 import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
@@ -28,9 +28,6 @@ public class CollectionRagConfig {
     @Value("${spring.ai.deepseek.chat.model}")
     private String chatModelName;
 
-    @Value("${langchain4j.deepseek.embedding-model-name}")
-    private String embedModelName;
-
     @Value("${spring.ai.deepseek.base-url}")
     private String baseUrl;
 
@@ -53,12 +50,7 @@ public class CollectionRagConfig {
 
     @Bean
     public EmbeddingModel embeddingModel() {
-        return OpenAiEmbeddingModel.builder()
-                .baseUrl(baseUrl)
-                .apiKey(apiKey)
-                .modelName(embedModelName)
-                .timeout(java.time.Duration.ofSeconds(60))
-                .build();
+        return new AllMiniLmL6V2EmbeddingModel();
     }
 
     // 文档摄取器：切片+向量化存入向量库
