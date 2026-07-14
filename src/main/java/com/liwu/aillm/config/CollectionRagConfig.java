@@ -26,6 +26,9 @@ public class CollectionRagConfig {
     private String apiKey;
 
     @Value("${spring.ai.deepseek.chat.model}")
+    private String chatModelName;
+
+    @Value("${langchain4j.deepseek.embedding-model-name}")
     private String embedModelName;
 
     @Value("${spring.ai.deepseek.base-url}")
@@ -43,7 +46,7 @@ public class CollectionRagConfig {
         return OpenAiChatModel.builder()
                 .baseUrl(baseUrl)
                 .apiKey(apiKey)
-                .modelName(embedModelName)
+                .modelName(chatModelName)
                 .timeout(Duration.ofSeconds(60))
                 .build();
     }

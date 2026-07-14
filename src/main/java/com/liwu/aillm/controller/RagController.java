@@ -27,7 +27,8 @@ import java.util.stream.Collectors;
 public class RagController {
 
     @Resource
-    private OpenAiChatModel chatModel;
+    private OpenAiChatModel chatLanguageModel;
+
     @Resource
     private EmbeddingModel embeddingModel;
     @Resource
@@ -65,7 +66,7 @@ public class RagController {
                 """.formatted(context);
 
         // 3. 调用DeepSeek生成答案
-        AiMessage response = chatModel.chat(
+        AiMessage response = chatLanguageModel.chat(
                 new SystemMessage(systemPrompt),
                 new UserMessage(question)
         ).aiMessage();
